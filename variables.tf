@@ -34,3 +34,15 @@ variable "iaas_classic_api_key" {
   type        = string
   default     = ""
 }
+
+variable "resource_group" {
+  description = "Resource group for resources."
+  type        = string
+  default     = ""
+}
+
+variable "region" {
+  description = ""
+  type        = string
+  default     = "us-south"
+}
