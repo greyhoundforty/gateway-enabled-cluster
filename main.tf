@@ -26,17 +26,9 @@ resource "ibm_container_worker_pool" "edge_workerpool" {
   disk_encryption   = "true"
   region            = var.region
 
-  labels = [
-    {
-      "dedicated" = "edge"
-    },
-    {
-      "node-role.kubernetes.io/edge" = "true"
-    },
-    {
-      "ibm-cloud.kubernetes.io/private-cluster-role" = "worker"
-    }
-  ]
+  labels = {
+    "dedicated" = "edge"
+  }
 }
 
 resource "ibm_container_worker_pool_zone_attachment" "edge_zone" {
@@ -46,3 +38,4 @@ resource "ibm_container_worker_pool_zone_attachment" "edge_zone" {
   public_vlan_id  = data.ibm_network_vlan.public.id
   private_vlan_id = data.ibm_network_vlan.private.id
 }
+
