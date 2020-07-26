@@ -13,25 +13,27 @@ resource "ibm_container_cluster" "gw_cluster" {
   tags                     = ["schematics-learning", var.project_name]
 }
 
-## Add worker pool to other zones once I know output
-
-
 resource "ibm_container_worker_pool" "edge_workerpool" {
-  resource_group_id = data.ibm_resource_group.rg.id
-  worker_pool_name  = "edge"
-  machine_type      = "u2c.2x4"
-  cluster           = ibm_container_cluster.gw_cluster.id
-  size_per_zone     = 2
-  hardware          = "shared"
-  disk_encryption   = "true"
-  region            = var.region
+  depends_on      = [ibm_container_cluster.gw_cluster]
+  cluster         = ibm_container_cluster.gw_cluster.id
+  disk_encryption = "true"
+  hardware        = "shared"
 
   labels = {
-    "dedicated" = "edge"
+    ibm-cloud.kubernetes.io / private-cluster-role = "worker",
+    node-role.kubernetes.io / edge                 = "true",
+    dedicated                                      = "edge"
   }
+
+  machine_type             = "u2c.2x4"
+  worker_pool_name         = "edge"
+  resource_group_id        = data.ibm_resource_group.rg.id
+  private_service_endpoint = "true"
+  size_per_zone            = 2
 }
 
 resource "ibm_container_worker_pool_zone_attachment" "edge_zone" {
+  depends_on      = [ibm_container_worker_pool.edge_workerpool]
   cluster         = ibm_container_cluster.gw_cluster.id
   worker_pool     = element(split("/", ibm_container_worker_pool.edge_workerpool.id), 1)
   zone            = var.datacenter
