@@ -28,7 +28,6 @@ resource "ibm_container_worker_pool" "edge_workerpool" {
   machine_type             = "u2c.2x4"
   worker_pool_name         = "edge"
   resource_group_id        = data.ibm_resource_group.rg.id
-  private_service_endpoint = "true"
   size_per_zone            = 2
 }
 
