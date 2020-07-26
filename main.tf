@@ -20,9 +20,9 @@ resource "ibm_container_worker_pool" "edge_workerpool" {
   hardware        = "shared"
 
   labels = {
-    ibm-cloud.kubernetes.io / private-cluster-role = "worker",
-    node-role.kubernetes.io / edge                 = "true",
-    dedicated                                      = "edge"
+    "ibm-cloud.kubernetes.io/private-cluster-role" = "worker",
+    "node-role.kubernetes.io/edge"                 = "true",
+    "dedicated"                                    = "edge"
   }
 
   machine_type             = "u2c.2x4"
