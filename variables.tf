@@ -5,9 +5,9 @@ variable "project_name" {
 }
 
 variable "datacenter" {
-  description = ""
+  description = "Datacenter Zone where worker and master nodes will be deployed."
   type        = string
-  default     = "dal10"
+  default     = "dal12"
 }
 
 variable "machine_flavor" {
@@ -39,10 +39,4 @@ variable "resource_group" {
   description = "Resource group for resources."
   type        = string
   default     = ""
-}
-
-variable "region" {
-  description = ""
-  type        = string
-  default     = "us-south"
 }
