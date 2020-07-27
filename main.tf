@@ -1,5 +1,5 @@
 resource "ibm_container_cluster" "gw_cluster" {
-  name                     = "gw-iks-${var.project_name}"
+  name                     = "${var.project_name}-iks"
   resource_group_id        = data.ibm_resource_group.rg.id
   datacenter               = var.datacenter
   machine_type             = var.machine_flavor

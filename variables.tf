@@ -1,7 +1,7 @@
 variable "project_name" {
   description = "Name for your testing project. [lowercase, cannot contain spaces]"
   type        = string
-  default     = ""
+  default     = "gw"
 }
 
 variable "datacenter" {
