@@ -31,12 +31,12 @@ resource "ibm_container_worker_pool" "edge_workerpool" {
   size_per_zone     = 2
 }
 
-resource "ibm_container_worker_pool_zone_attachment" "edge_zone" {
-  depends_on      = [ibm_container_worker_pool.edge_workerpool]
-  cluster         = ibm_container_cluster.gw_cluster.id
-  worker_pool     = element(split("/", ibm_container_worker_pool.edge_workerpool.id), 1)
-  zone            = var.datacenter
-  public_vlan_id  = data.ibm_network_vlan.public.id
-  private_vlan_id = data.ibm_network_vlan.private.id
-}
+# resource "ibm_container_worker_pool_zone_attachment" "edge_zone" {
+#   depends_on      = [ibm_container_worker_pool.edge_workerpool]
+#   cluster         = ibm_container_cluster.gw_cluster.id
+#   worker_pool     = element(split("/", ibm_container_worker_pool.edge_workerpool.id), 1)
+#   zone            = var.datacenter
+#   public_vlan_id  = data.ibm_network_vlan.public.id
+#   private_vlan_id = data.ibm_network_vlan.private.id
+# }
 
